@@ -64,7 +64,8 @@ body {
 
 .screen h1 {
   margin: 0;
-  font-size: 34px;
+  margin-top: 5px;
+  font-size: 25px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.025em;
