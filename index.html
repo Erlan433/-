@@ -13,11 +13,11 @@
   <main class="app-content">
     <!-- По умолчанию открыт календарь; navigation.js переключает класс screen-hidden. -->
     <section id="calendarScreen" class="screen" aria-labelledby="calendarTitle">
-      <!-- calendar.js подставляет текущие месяц и год; кнопки пока без обработчиков. -->
+      <!-- calendar.js подставляет месяц и год и переключает месяцы кнопками. -->
       <header class="calendar-header">
-        <button class="calendar-navigation-button" type="button" aria-label="Предыдущий месяц">‹</button>
+        <button id="previousMonth" class="calendar-navigation-button" type="button" aria-label="Предыдущий месяц">‹</button>
         <h1 id="calendarTitle"></h1>
-        <button class="calendar-navigation-button" type="button" aria-label="Следующий месяц">›</button>
+        <button id="nextMonth" class="calendar-navigation-button" type="button" aria-label="Следующий месяц">›</button>
       </header>
       <!-- Заголовки недели и числа выбранного месяца создаёт renderCalendar(). -->
       <div id="calendarGrid" class="calendar-grid" role="grid" aria-labelledby="calendarTitle"></div>

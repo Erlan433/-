@@ -1,5 +1,7 @@
 const calendarTitle = document.getElementById('calendarTitle');
 const calendarGrid = document.getElementById('calendarGrid');
+const previousMonthButton = document.getElementById('previousMonth');
+const nextMonthButton = document.getElementById('nextMonth');
 const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 const monthFormatter = new Intl.DateTimeFormat('ru-RU', {
   month: 'long',
@@ -44,6 +46,21 @@ export function renderCalendar(year, month) {
   calendarGrid.replaceChildren(fragment);
 }
 
-// При запуске отображается календарная сетка текущего месяца.
+// Храним первый день показанного месяца, чтобы Date корректно менял год на его границах.
 const currentDate = new Date();
-renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+let displayedMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+function changeMonth(offset) {
+  displayedMonth = new Date(
+    displayedMonth.getFullYear(),
+    displayedMonth.getMonth() + offset,
+    1,
+  );
+  renderCalendar(displayedMonth.getFullYear(), displayedMonth.getMonth());
+}
+
+previousMonthButton.addEventListener('click', () => changeMonth(-1));
+nextMonthButton.addEventListener('click', () => changeMonth(1));
+
+// При запуске отображается календарная сетка текущего месяца.
+renderCalendar(displayedMonth.getFullYear(), displayedMonth.getMonth());
