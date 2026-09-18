@@ -57,6 +57,11 @@
 }
 
 .calendar-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
   font-size: 17px;
 }
 
@@ -64,10 +69,27 @@
 .calendar-day.today {
   align-self: center;
   justify-self: center;
-  width: 36px;
-  min-height: 36px;
-  border-radius: 50%;
+  width: 44px;
+  min-height: 52px;
+  border-radius: 18px;
   background: var(--accent);
   color: #fff;
   font-weight: 600;
+}
+
+/* Цвет события приходит из участника через CSS-переменную --event-color. */
+.calendar-event {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--event-color);
+  border-radius: 50%;
+}
+
+/* Запланированное событие — контур, выполненное — круг с заливкой. */
+.calendar-event-planned {
+  background: transparent;
+}
+
+.calendar-event-completed {
+  background: var(--event-color);
 }
