@@ -8,6 +8,15 @@ const monthFormatter = new Intl.DateTimeFormat('ru-RU', {
   year: 'numeric',
 });
 
+// Ключ — дата в формате ГГГГ-ММ-ДД. Пока это ручные тестовые данные без очереди.
+// status может быть только "planned" или "completed".
+export const calendarEvents = {
+  '2026-09-16': { personId: 1, status: 'completed' },
+  '2026-09-18': { personId: 2, status: 'completed' },
+  '2026-09-21': { personId: 3, status: 'planned' },
+  '2026-09-24': { personId: 4, status: 'planned' },
+};
+
 // month использует стандарт JavaScript: январь — 0, декабрь — 11.
 export function renderCalendar(year, month) {
   const selectedMonth = new Date(year, month, 1);
