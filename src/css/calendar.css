@@ -59,3 +59,15 @@
 .calendar-day {
   font-size: 17px;
 }
+
+/* Сегодняшний день выделяется отдельно; остальные ячейки не меняются. */
+.calendar-day.today {
+  align-self: center;
+  justify-self: center;
+  width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}

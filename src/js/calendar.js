@@ -35,11 +35,22 @@ export function renderCalendar(year, month) {
   }
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
   for (let day = 1; day <= daysInMonth; day += 1) {
     const dayCell = document.createElement('div');
     dayCell.className = 'calendar-day';
     dayCell.setAttribute('role', 'gridcell');
     dayCell.textContent = day;
+
+    // Класс today получает только реальная сегодняшняя дата в соответствующем месяце.
+    const isToday = selectedMonth.getFullYear() === today.getFullYear()
+      && selectedMonth.getMonth() === today.getMonth()
+      && day === today.getDate();
+    if (isToday) {
+      dayCell.classList.add('today');
+      dayCell.setAttribute('aria-current', 'date');
+    }
+
     fragment.append(dayCell);
   }
 
