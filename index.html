@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Календарь справедливости</title>
+  <link rel="stylesheet" href="src/css/main.css">
+  <link rel="stylesheet" href="src/css/calendar.css">
+  <link rel="stylesheet" href="src/css/settings.css">
+</head>
+<body>
+  <main class="app-content">
+    <!-- По умолчанию открыт календарь; navigation.js переключает класс screen-hidden. -->
+    <section id="calendarScreen" class="screen" aria-labelledby="calendarTitle">
+      <h1 id="calendarTitle">Календарь</h1>
+    </section>
+    <section id="settingsScreen" class="screen screen-hidden" aria-labelledby="settingsTitle">
+      <h1 id="settingsTitle">Настройки</h1>
+      <!-- app.js применяет выбранную тему ко всему приложению. -->
+      <fieldset class="theme-settings">
+        <legend>Тема</legend>
+        <div class="theme-options">
+          <label><input type="radio" name="theme" value="light"><span>Светлая</span></label>
+          <label><input type="radio" name="theme" value="dark"><span>Тёмная</span></label>
+        </div>
+      </fieldset>
+      <section class="participants-section" aria-labelledby="participantsTitle">
+        <h2 id="participantsTitle">Участники</h2>
+        <!-- Строки участников создаёт persons.js из массива persons. -->
+        <ul id="participantsList" class="participants-list"></ul>
+      </section>
+    </section>
+  </main>
+
+  <!-- aria-controls связывает каждую кнопку с ID соответствующего экрана. -->
+  <nav class="bottom-navigation" aria-label="Основная навигация">
+    <div class="navigation-items">
+      <button class="navigation-button" type="button" aria-current="page" aria-controls="calendarScreen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="4" />
+          <path d="M7 3v4M17 3v4M3 10h18M8 14h2M14 14h2M8 17h2M14 17h2" />
+        </svg>
+        <span>Календарь</span>
+      </button>
+      <button class="navigation-button" type="button" aria-controls="settingsScreen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 7h16M4 17h16" />
+          <circle cx="9" cy="7" r="3" class="slider-knob" />
+          <circle cx="15" cy="17" r="3" class="slider-knob" />
+        </svg>
+        <span>Настройки</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Одно окно для всех участников. method="dialog" закрывает его по кнопке «Готово».
+       Данные обновляются при вводе в persons.js, а не при отправке формы. -->
+  <dialog id="participantDialog" class="participant-dialog" aria-labelledby="participantDialogTitle">
+    <form method="dialog">
+      <h2 id="participantDialogTitle">Редактировать участника</h2>
+      <label for="participantName">Имя</label>
+      <input id="participantName" type="text" required autocomplete="off" autofocus>
+      <fieldset class="color-picker">
+        <legend>Цвет</legend>
+        <!-- Готовая палитра создаётся в persons.js; справа — системный выбор своего цвета. -->
+        <div class="color-options">
+          <div id="presetColors" class="preset-colors"></div>
+          <label class="custom-color" title="Свой цвет">
+            <span aria-hidden="true"></span>
+            <input id="participantColor" type="color" aria-label="Свой цвет">
+          </label>
+        </div>
+      </fieldset>
+      <button class="participant-done" type="submit">Готово</button>
+    </form>
+  </dialog>
+
+  <!-- ES-модули выполняются после разбора HTML. Страницу нужно открывать через HTTP-сервер. -->
+  <script type="module" src="src/js/app.js"></script>
+  <script type="module" src="src/js/calendar.js"></script>
+  <script type="module" src="src/js/rotation.js"></script>
+  <script type="module" src="src/js/persons.js"></script>
+  <script type="module" src="src/js/storage.js"></script>
+  <script type="module" src="src/js/navigation.js"></script>
+</body>
+</html>
